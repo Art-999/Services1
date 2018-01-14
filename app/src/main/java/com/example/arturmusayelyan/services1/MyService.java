@@ -20,15 +20,14 @@ public class MyService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d(LOG_TAG, "onCreate");
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(LOG_TAG, "onStartCommand");
-
         someTask();
-
-        return super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
     @Override
@@ -50,9 +49,12 @@ public class MyService extends Service {
             public void run() {
                 for (int i = 1; i <= 7; i++) {
                     SystemClock.sleep(1000);
+                    if (i == 3) {
+                        stopSelf();// destroy klini heto noric ksharunakvi qani vor onStartCommande START_NOT_STICKY e trvac vor veradarzni
+                    }
                     Log.d(LOG_TAG, "i= " + i);
                 }
-                stopSelf();
+                stopSelf(1);// karox e startId stanal u endhati miayn ayd idov onStartCommand exac service
             }
         });
         thread.start();

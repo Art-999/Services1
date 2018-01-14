@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    //Basic Service example
+
     private final String LOG_TAG = "Art";
     private Button startBtn, stopBtn;
     private ProgressBar progressBar;
@@ -25,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startButtonClick(View view) {
-       // startService(new Intent(this, MyService.class));
-        new MyService().someTask();
+        startService(new Intent(this, MyService.class));
+
     }
 
     public void stopButtonClick(View view) {
